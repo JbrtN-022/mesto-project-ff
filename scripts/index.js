@@ -16,7 +16,6 @@ function createCard(item, deleteCard)  {
 
     deleteBtn.addEventListener('click', deleteCard);
 
-    cardlist.append(itemCard);
     return itemCard;
 }
 
@@ -25,8 +24,9 @@ function deleteCardCallback(evt) {
     evt.target.closest('.places__item').remove();
 }
 // @todo: Вывести карточки на страницу
-initialCards.forEach(function(item) {
-    const itemCard  = createCard(item, deleteCardCallback);
+initialCards.forEach((item) => {
+    const cardElement  = createCard(item, deleteCardCallback);
+    cardlist.append(cardElement);
 });
 
  
