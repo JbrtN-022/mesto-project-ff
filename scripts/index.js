@@ -1,4 +1,5 @@
-
+import {initialCards} from './cards.js'
+import '../pages/index.css';
 // @todo: Темплейт карточки
 const template = document.getElementById('card-template').content;
 
