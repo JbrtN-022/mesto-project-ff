@@ -1,5 +1,8 @@
+import { openM , closeM } from '../components/modal.js';
+import { likeCard, popButton } from '../components/card.js';
 import {initialCards} from './cards.js';
 import '../pages/index.css';
+
 // @todo: Темплейт карточки
 const template = document.getElementById('card-template').content;
 
@@ -30,4 +33,4 @@ initialCards.forEach((item) => {
     cardlist.append(cardElement);
 });
 
- 
+
