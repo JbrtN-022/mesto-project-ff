@@ -1,23 +1,26 @@
-export {openModal as openM , closeModal as closeM};
+export function openModal(evt) {
+    evt.classList.add('.popup_is-opened');
+    document.addEventListener('keydown', closeModalViaEsc);
+}
 
-const edditButton = document.querySelector('.profile__edit-button');
-const popupEdd = document.querySelector('.popup');
-const closePop = document.querySelector('.popup__close');
+export function closeModal(evt) {
+    if (evt.target.classList.contains('.popup__close')) {
+        delletClassOpen();
+    }
+    else if (evt.target.classList.contains('.popup_is-opened')) {
+        delletClassOpen();
+    }
+}
 
-const openModal =  edditButton.addEventListener('click', function(evt) {
-    popupEdd.setAttribute('style',`
-        display: flex; `)
-});
+function closeModalViaEsc(evt) {
+    if (evt.key === 'Escape') {
+        delletClassOpen();
+    }
+    document.removeEventListener('keydown', closeModalViaEsc);
+}
 
-
-
-
-const closeModal = closePop.addEventListener('click', function(evt) {
-    popupEdd.setAttribute('style',`
-        display: none; `)
-});
-
-
-
+function delletClassOpen() {
+    document.querySelector('.popup_is-opened').classList.remove('.popup_is-opened');
+}
 
 
