@@ -1,38 +1,24 @@
 import { openModal, closeModal } from '../components/modal.js';
 import { initialCards } from './cards.js';
-import { likeCardCallback , deleteCardCallback} from './card.js';
+import { createCard, likeCardCallback, deleteCardCallback } from './card.js';
 import '../pages/index.css';
 
 // @todo: Темплейт карточки
-const template = document.getElementById('card-template').content;
+export const template = document.getElementById('card-template').content;
+const itemCard = template.querySelector('.places__item').cloneNode(true);
+
+const imageCard = itemCard.querySelector('.card__image');
 
 // @todo: DOM узлы
 const cardlist = document.querySelector('.places__list');
 const buttonEdd = document.querySelector('.profile__edit-button');
 const buttonAdProfile = document.querySelector('.profile__add-button');
 const popupTypeEdd = document.querySelector('.popup_type_edit');
+const popupContentImage = document.querySelector('.popup__content_content_image')
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_description');
+const titleCard = itemCard.querySelector('.card__title');
 const popupNewCard = document.querySelector('.popup_type_new-card');
-
-
-// @todo: Функция создания карточки
-function createCard(item, deleteCardCallback, likeCardCallback) {
-    const itemCard = template.querySelector('.places__item').cloneNode(true);
-
-    const imageCard = itemCard.querySelector('.card__image');
-    const deleteBtn = itemCard.querySelector('.card__delete-button');
-    const likeBtn = imageCard.querySelector('.card__like-button');
-
-    imageCard.src = item.link;
-    imageCard.alt = item.name;
-
-    itemCard.querySelector('.card__title').textContent = item.name;
-
-    deleteBtn.addEventListener('click', () => { deleteCardCallback(deleteBtn) });
-    likeBtn.addEventListener('click', () => { likeCardCallback(likeBtn) })
-
-    return itemCard
-}
-
 // @todo: Вывести карточки на страницу
 initialCards.forEach((item) => {
     const cardElement = createCard(item, deleteCardCallback, likeCardCallback);
@@ -44,12 +30,11 @@ initialCards.forEach((item) => {
 buttonAdProfile.addEventListener('click', () => { openModal(popupNewCard) });
 buttonEdd.addEventListener('click', () => { openModal(popupTypeEdd) });
 document.addEventListener('click', closeModal);
+popupContentImage.addEventListener('click', () => { openModal(imageCard) })
+
 
 // Находим форму в DOM
-const formElement = document.querySelector('.popup__form');
 
-const nameInput = document.querySelector('.popup__input_type_name');
-const jobInput = document.querySelector('.popup__input_type_description');
 const profileNameElement = document.querySelector('.profile__title');
 const profileDescriptionElement = document.querySelector('.profile__description');
 export const eventCust = new Event('customEvent');
@@ -75,4 +60,37 @@ function handleFormSubmit(evt) {
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', handleFormSubmit);
+formElementProf.addEventListener('submit', handleFormSubmit);
+
+
+const formElementProf = document.querySelector('[name="edit-profile"]');
+const formElementNew = document.querySelector('[name="new-place"]');
+const typeCardName = document.querySelector('.popup__input_type_card-name')
+const typeUrl = document.querySelector('.popup__input_type_url')
+
+function clearForm(form) {
+    form.reset();
+}
+
+formElementNew.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const CardNameValue = typeCardName.value;
+    const UrlValue = typeUrl.value;
+
+    const newCard = {
+        name: CardNameValue,
+        link: UrlValue
+    };
+    const cardElementNew = createCard(newCard, () => {
+        cardElementNew.remove();
+    }, () => {
+        cardElementNew.querySelector('.card__like-button').classList.toggle('card__like-button_active')
+    });
+    cardlist.prepend(cardElementNew);
+
+    clearForm(formElementNew);
+})
+
+
+//объсните, пожалуйса, логику открытия попапа :( 
