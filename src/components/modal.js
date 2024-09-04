@@ -1,28 +1,15 @@
-import { eventCust } from "./index.js";
-export function openModal(evt) {
-    evt.classList.add('popup_is-opened');
-    document.addEventListener('keydown', closeModalViaEsc);
-    document.dispatchEvent(eventCust);
-}
 
-export function closeModal(evt) {
-    if (evt.target.classList.contains('popup__close')) {
-        delletClassOpen();
+export function openModal(popupElement) {
+    popupElement.classList.add('popup_is-opened');
+    document.addEventListener('keydown', closePopupEsc);
+};
+export function closeModal(popupElement) {
+    popupElement.classList.remove('popup_is-opened');
+    document.removeEventListener('keydown', closePopupEsc);
+};
+
+function closePopupEsc(event) {
+    if (event.key === 'Escape') {
+        closeModal(document.querySelector('.popup_is-opened'));
     }
-    else if (evt.target.classList.contains('popup_is-opened')) {
-        delletClassOpen();
-    }
 }
-
-function closeModalViaEsc(evt) {
-    if (evt.key === 'Escape') {
-        delletClassOpen();
-    }
-    document.removeEventListener('keydown', closeModalViaEsc);
-}
-
-function delletClassOpen() {
-    document.querySelector('.popup_is-opened').classList.remove('popup_is-opened');
-}
-
-

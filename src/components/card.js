@@ -11,10 +11,11 @@ export function likeCardCallback(evt) {
     }
 };
 
-// @todo: Функция создания карточки
-export function createCard(item, deleteCardCallback, likeCardCallback) {
-    const itemCard = template.querySelector('.places__item').cloneNode(true);
 
+
+// @todo: Функция создания карточки
+export function createCard(item, deleteCardCallback, likeCardCallback, openModalImage) {
+    const itemCard = template.querySelector('.places__item').cloneNode(true);
     const imageCard = itemCard.querySelector('.card__image');
     const deleteBtn = itemCard.querySelector('.card__delete-button');
     const likeBtn = itemCard.querySelector('.card__like-button');
@@ -23,9 +24,11 @@ export function createCard(item, deleteCardCallback, likeCardCallback) {
     imageCard.alt = item.name;
 
     titleCard.textContent = item.name;
-
+    
+    imageCard.addEventListener('click', openModalImage);
     deleteBtn.addEventListener('click', deleteCardCallback);
     likeBtn.addEventListener('click', likeCardCallback);
 
+    
     return itemCard
 }
