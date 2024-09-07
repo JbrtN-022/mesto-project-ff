@@ -26,7 +26,12 @@ initialCards.forEach((item) => {
 // @todo: открытие закрытие  popup   
 
 buttonAddProfile.addEventListener('click', () => { openModal(popupNewCard) });
-buttonEditProfile.addEventListener('click', () => { openModal(popupTypeEdit) });
+buttonEditProfile.addEventListener('click', () => {
+    
+    nameInput.value = profileNameElement.textContent; 
+    jobInput.value = profileDescriptionElement.textContent; 
+
+    openModal(popupTypeEdit) });
 
 // открытие изображения 
 function openModalImage(evt) { 
@@ -60,10 +65,9 @@ const profileNameElement = document.querySelector('.profile__title');
 const profileDescriptionElement = document.querySelector('.profile__description');
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
-nameInput.value = profileNameElement.textContent; 
-jobInput.value = profileDescriptionElement.textContent; 
 
-function handleFormSubmit(evt) {
+
+function handleProfileFormSubmit(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     // Так мы можем определить свою логику отправки.
     // О том, как это делать, расскажем позже.
@@ -80,7 +84,7 @@ function handleFormSubmit(evt) {
 const formElementProf = document.querySelector('[name="edit-profile"]');
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formElementProf.addEventListener('submit', handleFormSubmit);
+formElementProf.addEventListener('submit', handleProfileFormSubmit);
 
 const formElementNew = document.querySelector('[name="new-place"]');
 const typeCardName = document.querySelector('.popup__input_type_card-name')
