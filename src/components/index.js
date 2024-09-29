@@ -1,5 +1,6 @@
 import { openModal, closeModal } from './modal.js';
 import { initialCards } from './cards.js';
+import {validationConfig} from './validation.js';
 import { createCard, likeCardCallback, deleteCardCallback } from './card.js';
 import '../pages/index.css';
 
@@ -17,6 +18,7 @@ const popupTypeImage = document.querySelector('.popup_type_image');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_description');
 const popupNewCard = document.querySelector('.popup_type_new-card');
+
 // @todo: Вывести карточки на страницу
 initialCards.forEach((item) => {
     const cardElement = createCard(item, deleteCardCallback, likeCardCallback, openModalImage);
@@ -112,3 +114,5 @@ formElementNew.addEventListener('submit', (evt) => {
     closeModal(popupNewCard);
 })
 
+
+validationConfig();
