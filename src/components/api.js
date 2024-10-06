@@ -47,7 +47,6 @@ const config = {
     }).then(checkResponse);
   };
   
-  // запрос на удаление карточки
   export const removeCard = (id) => {
     return fetch(`${config.baseUrl}/cards/${id}`, {
       method: "DELETE",
@@ -55,15 +54,7 @@ const config = {
     }).then(checkResponse);
   };
   
-  // запрос на лайк карточки
-  export const addLikeCard = (id, isLiked) => {
-    return fetch(`${config.baseUrl}/cards/likes/${id}`, {
-      method: isLiked ? "DELETE" : "PUT",
-      headers: config.headers,
-    }).then(checkResponse);
-  };
-  
-  // запрос на изменение аватара
+
   export const updateAvatar = (data) => {
     return fetch(`${config.baseUrl}/users/me/avatar`, {
       method: "PATCH",
@@ -71,3 +62,12 @@ const config = {
       body: JSON.stringify(data),
     }).then(checkResponse);
   };
+
+  export const addLikeCard = (id, isLiked) => {
+    return fetch(`${config.baseUrl}/cards/likes/${id}`, {
+      method: isLiked ? "DELETE" : "PUT",
+      headers: config.headers,
+    }).then(checkResponse);
+  };
+  
+
