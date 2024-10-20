@@ -19,7 +19,10 @@ const config = {
     return fetch(`${config.baseUrl}/cards`, {
         headers: config.headers,
       })
-      .then(checkResponse);
+      .then(checkResponse)
+      .catch((error) => {
+        console.log(error); 
+      });
   }
 
   
@@ -27,7 +30,10 @@ const config = {
     return fetch(`${config.baseUrl}/users/me`, {
       headers: config.headers,
       })
-      .then(checkResponse);
+      .then(checkResponse)
+      .catch((error) => {
+        console.log(error); 
+      });
   }
 
   export const updateUser = () => {
@@ -36,7 +42,10 @@ const config = {
         headers: config.headers,
         body: JSON.stringify(data),
       })
-      .then(checkResponse);
+      .then(checkResponse)
+      .catch((error) => {
+        console.log(error); 
+      });
   };
 
   export const postNewCard = (name, link) => {
@@ -44,14 +53,22 @@ const config = {
       method: "POST",
       headers: config.headers,
       body: JSON.stringify(name, link),
-    }).then(checkResponse);
+    })
+    .then(checkResponse)
+    .catch((error) => {
+      console.log(error);
+    });
   };
   
   export const removeCard = (id) => {
     return fetch(`${config.baseUrl}/cards/${id}`, {
       method: "DELETE",
       headers: config.headers,
-    }).then(checkResponse);
+    })
+    .then(checkResponse)
+    .catch((error) => {
+      console.log(error); 
+    });
   };
   
 
@@ -60,14 +77,22 @@ const config = {
       method: "PATCH",
       headers: config.headers,
       body: JSON.stringify(data),
-    }).then(checkResponse);
+    })
+    .then(checkResponse)
+    .catch((error) => {
+      console.log(error);
+    });
   };
 
   export const addLikeCard = (id, isLiked) => {
     return fetch(`${config.baseUrl}/cards/likes/${id}`, {
       method: isLiked ? "DELETE" : "PUT",
       headers: config.headers,
-    }).then(checkResponse);
+    })
+    .then(checkResponse)
+    .catch((error) => {
+      console.log(error); 
+    });
   };
   
 
