@@ -5,9 +5,9 @@ const config = {
       "Content-Type": "application/json",
     },
   };
+  
   function checkResponse (res) {
     if (res.ok){
-        console.log(res.json())
         return res.json();
     } else {
     return Promise.reject(`ошибка ${res.status}`);
@@ -36,11 +36,14 @@ const config = {
       });
   }
 
-  export const updateUser = () => {
+  export const updateUser = ({name, about}) => {
     return fetch(`${config.baseUrl}/users/me`, {
         method : 'PATCH',
         headers: config.headers,
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          name: name,
+          about: about,
+      }),
       })
       .then(checkResponse)
       .catch((error) => {
@@ -84,15 +87,22 @@ const config = {
     });
   };
 
-  export const addLikeCard = (id, isLiked) => {
-    return fetch(`${config.baseUrl}/cards/likes/${id}`, {
-      method: isLiked ? "DELETE" : "PUT",
-      headers: config.headers,
-    })
-    .then(checkResponse)
-    .catch((error) => {
-      console.log(error); 
-    });
-  };
   
+  export function addLikeCard(cardId) {
+    return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: config.headers,
+    }).then((res) => {
+      return checkResponse(res);
+    });
+  }
+  
+  export function deleteLikeCard(cardId) {
+    return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: config.headers,
+    }).then((res) => {
+      return checkResponse(res);
+    });
+  }
 
