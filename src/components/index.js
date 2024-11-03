@@ -1,4 +1,4 @@
-import "../pages/index.css"; 
+import "../pages/index.css";
 import { createCard, deleteCard, likeCard, newCardForm } from "./card.js"
 import { openPopup, closePopup } from "./modal.js"
 import { clearValidation, enableValidation } from "./validation.js"
@@ -9,7 +9,7 @@ export const template = document.getElementById('card-template').content;
 
 // @todo: DOM узлы 
 const placeList = document.querySelector('.places__list');
-const editPopup = document.querySelector('.popup_type_edit');
+const popupTypeEdit = document.querySelector('.popup_type_edit');
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 const profileImage = document.querySelector('.profile__image');
@@ -43,13 +43,13 @@ const validationConfig = {
 
 Promise.all([getUser(), getCards()])
 .then(([resProfile, resCards]) => {
-    renderProfile(resProfile);
+    renderYourProfile(resProfile);
     renderInitialCards(resCards);
 });
 
 
 
-function renderProfile(profInfo) {
+function renderYourProfile(profInfo) {
     profileConfig.id = profInfo._id;
     profileConfig.title = profInfo.name;
     profileConfig.about = profInfo.about;
@@ -75,14 +75,14 @@ function handleProfileFormSubmit(evt) {
     const button = document.querySelector('.popup__button');
     button.textContent = 'Сохранение...';
 
-   // console.log({ name: nameInputValue, about: jobInputValue });
+    // console.log({ name: nameInputValue, about: jobInputValue });
 
     updateUser({ name: nameInputValue, about: jobInputValue })
     .then((res) => {
         //console.log("Ответ", res);
         profileTitle.textContent = res.name;
         profileDescription.textContent = res.about;  
-        closePopup(editPopup);
+        closePopup(popupTypeEdit);
     })
     .catch((err) => console.log(err))
     .finally(() => button.textContent = 'Сохранить');
@@ -138,7 +138,7 @@ function handleNewCard(evt) {
     .catch((err) => console.log(err));
 }
 
- function likeCardMain(evt, cardData, userId, likeCounter) {
+function likeCardMain(evt, cardData, userId, likeCounter) {
     const likePromise = cardData.likes.some(like => like._id === userId) ? deleteLikeCard(cardData._id) : addLikeCard(cardData._id);
     likePromise
     .then((res) => { 
@@ -173,7 +173,7 @@ profileEditButton.addEventListener('click', () => {
     profileForm.name.value = profileTitle.textContent;
     profileForm.description.value = profileDescription.textContent;
     clearValidation(profileForm, validationConfig);
-    openPopup(editPopup);
+    openPopup(popupTypeEdit);
 });
 newCardButton.addEventListener('click', () => {
     clearValidation(newCardForm, validationConfig);

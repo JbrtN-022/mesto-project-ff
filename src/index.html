@@ -39,8 +39,8 @@
       <button type="button" class="popup__close"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
       <form novalidate class="popup__form" name="editprofile">
-        <input  style="color: red;" type="text" id="input_name" name="name" class="popup__input popup__input_type_name" placeholder="Имя" minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
-        <span class="input_name-error popup__span"></span>
+        <input  type="text" id="input_name" name="name" class="popup__input popup__input_type_name" placeholder="Имя" minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+        <span style="color: red;" class="input_name-error popup__span"></span>
         <input type="text" id="input_description" name="description" class="popup__input popup__input_type_description" placeholder="Занятие" minlength="2" maxlength="200" pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$" data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
         <span  style="color: red;" class="input_description-error popup__span" ></span>
         <button type="submit" class="button popup__button">Сохранить</button>
@@ -60,13 +60,6 @@
       </form>
     </div>
   </div>
-  <div class="popup popup_type_image">
-    <div class="popup__content popup__content_content_image">
-      <button type="button" class="popup__close"></button>
-      <img src="" alt="" class="popup__image">
-      <p class="popup__caption"></p>
-    </div>
-  </div>
   <div class="popup popup_type_avatar">
     <div class="popup__content">
       <button type="button" class="popup__close"></button>
@@ -76,6 +69,13 @@
         <span style="color: red;" class="input_avatar-error popup__span"></span>
         <button type="submit" name="button" class="button popup__button">Сохранить</button>
       </form>
+    </div>
+  </div>
+  <div class="popup popup_type_image">
+    <div class="popup__content popup__content_content_image">
+      <button type="button" class="popup__close"></button>
+      <img src="" alt="" class="popup__image">
+      <p class="popup__caption"></p>
     </div>
   </div>
 </div>

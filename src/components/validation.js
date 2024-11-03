@@ -10,20 +10,20 @@ const hideInputError = (formElement, inputElement, config) => {
   inputElement.classList.remove(config.inputErrorClass)
   errorElement.classList.remove(config.errorClass)
   errorElement.textContent = ''
-} 
+}
 
 
 const isValid = (formElement, inputElement, config) => {
   if (inputElement.validity.patternMismatch) {
-      inputElement.setCustomValidity(inputElement.dataset.errorMessage)
+    inputElement.setCustomValidity(inputElement.dataset.errorMessage)
   } else {
-      inputElement.setCustomValidity('')
+    inputElement.setCustomValidity('')
   }
 
   if (!inputElement.validity.valid) {
-      showInputError(formElement, inputElement, config)
+    showInputError(formElement, inputElement, config)
   } else {
-      hideInputError(formElement, inputElement, config)
+    hideInputError(formElement, inputElement, config)
   }
 }
 
@@ -46,21 +46,21 @@ const setEventListeners = (formElement, config) => {
   const buttonElement = formElement.querySelector(config.submitButtonSelector)
   toggleButtonState(inputList, buttonElement, config)
   inputList.forEach((inputElement) => {
-      inputElement.addEventListener('input', function () {
-          isValid(formElement, inputElement, config)
-          toggleButtonState(inputList, buttonElement, config)
-          
-      })
+    inputElement.addEventListener('input', function () {
+      isValid(formElement, inputElement, config)
+      toggleButtonState(inputList, buttonElement, config)
+
+    })
   })
 }
 
 export const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector))
   formList.forEach((formElement) => {
-      formElement.addEventListener('submit', evt => {
-          evt.preventDefault()
-      })
-      setEventListeners(formElement, config)
+    formElement.addEventListener('submit', evt => {
+      evt.preventDefault()
+    })
+    setEventListeners(formElement, config)
   })
 }
 
@@ -74,11 +74,19 @@ export const clearValidation = (formElement, config) => {
 }
 
 const disableSubmitButton = (button, config) => {
-button.classList.add(config.inactiveButtonClass)
-button.disabled = true
+  if (button) { 
+  button.classList.add(config.inactiveButtonClass)
+  button.disabled = true;
+} else {
+  console.warn("Кнопка отправки формы не найдена");
+}
 }
 
 const enableSubmitButton = (button, config) => {
-button.classList.remove(config.inactiveButtonClass)
-button.disabled = false
+  if (button) { 
+  button.classList.remove(config.inactiveButtonClass)
+  button.disabled = false;
+} else {
+  console.warn("Кнопка отправки формы не найдена");
+}
 }

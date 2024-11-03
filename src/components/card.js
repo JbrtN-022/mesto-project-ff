@@ -5,7 +5,7 @@ export const newCardForm = document.forms.newplace
 
 // @todo: Функция создания карточки
 
-export function createCard (item, deleteCardMain, likeCardMain, openPopupWithImage, userId) {
+export function createCard(item, deleteCardMain, likeCardMain, openPopupWithImage, userId) {
     const cardElement = templateCard.querySelector('.places__item').cloneNode(true)
     const cardDeleteButton = cardElement.querySelector('.card__delete-button')
     const cardLikeButton = cardElement.querySelector('.card__like-button')
@@ -30,7 +30,7 @@ export function createCard (item, deleteCardMain, likeCardMain, openPopupWithIma
 
     cardImage.addEventListener('click', () => openPopupWithImage(item.link, item.name))
     cardLikeButton.addEventListener('click', (evt) => likeCardMain(evt, item, userId, likeCounter))
-    
+
     return cardElement;
 }
 
@@ -44,7 +44,7 @@ export function deleteCard(evt) {
 // Функция лайка карточки
 
 export function likeCard(evt) {
-    if(evt.target.classList.contains('card__like-button')) {
+    if (evt.target.classList.contains('card__like-button')) {
         evt.stopPropagation()
         evt.target.classList.toggle('card__like-button_is-active')
     }
