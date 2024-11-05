@@ -1,12 +1,10 @@
-// Темплейт карт
-const templateCard = document.querySelector('#card-template').content;
-
-export const newCardForm = document.forms.newplace
+// Темплейт картconst  
+const template = document.getElementById('card-template').content;
 
 // @todo: Функция создания карточки
 
 export function createCard(item, deleteCardMain, likeCardMain, openPopupWithImage, userId) {
-    const cardElement = templateCard.querySelector('.places__item').cloneNode(true)
+    const cardElement = template.querySelector('.places__item').cloneNode(true)
     const cardDeleteButton = cardElement.querySelector('.card__delete-button')
     const cardLikeButton = cardElement.querySelector('.card__like-button')
     const cardImage = cardElement.querySelector('.card__image')

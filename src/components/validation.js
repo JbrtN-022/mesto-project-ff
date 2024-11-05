@@ -8,10 +8,10 @@ const showInputError = (formElement, inputElement, config) => {
 const hideInputError = (formElement, inputElement, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
   inputElement.classList.remove(config.inputErrorClass)
+  inputElement.setCustomValidity("");
   errorElement.classList.remove(config.errorClass)
   errorElement.textContent = ''
 }
-
 
 const isValid = (formElement, inputElement, config) => {
   if (inputElement.validity.patternMismatch) {
@@ -74,19 +74,19 @@ export const clearValidation = (formElement, config) => {
 }
 
 const disableSubmitButton = (button, config) => {
-  if (button) { 
-  button.classList.add(config.inactiveButtonClass)
-  button.disabled = true;
-} else {
-  console.warn("Кнопка отправки формы не найдена");
-}
+  if (button) {
+    button.classList.add(config.inactiveButtonClass)
+    button.disabled = true;
+  } else {
+    console.warn("Кнопка отправки формы не найдена");
+  }
 }
 
 const enableSubmitButton = (button, config) => {
-  if (button) { 
-  button.classList.remove(config.inactiveButtonClass)
-  button.disabled = false;
-} else {
-  console.warn("Кнопка отправки формы не найдена");
-}
+  if (button) {
+    button.classList.remove(config.inactiveButtonClass)
+    button.disabled = false;
+  } else {
+    console.warn("Кнопка отправки формы не найдена");
+  }
 }
